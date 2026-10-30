@@ -50,7 +50,7 @@ if (form) {
     }
 
     // ИСПРАВЛЕНО: Точный адрес для отправки данных формы
-    fetch("https://web3forms.com", {
+    fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: formData
     })
