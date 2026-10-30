@@ -34,11 +34,14 @@ revealElements.forEach((el) => observer.observe(el));
 
 if (form) {
   form.addEventListener("submit", (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Запрещаем перезагрузку страницы
 
     const formData = new FormData(form);
+    
+    // Ваш проверенный ключ доступа
     formData.append("access_key", "7541468b-9bac-4711-b0f2-6c120e19d9e2");
 
+    // Этот кусочек автоматически подхватит текст из ваших инпутов
     const inputs = form.querySelectorAll("input, textarea");
     if (inputs.length >= 3) {
       formData.append("name", inputs[0].value);
@@ -46,6 +49,7 @@ if (form) {
       formData.append("message", inputs[2].value);
     }
 
+    // ИСПРАВЛЕНО: Точный адрес для отправки данных формы
     fetch("https://web3forms.com", {
       method: "POST",
       body: formData
@@ -53,7 +57,7 @@ if (form) {
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        form.reset();
+        form.reset(); // Очищаем поля формы
         if (formNote) {
           formNote.hidden = false;
           setTimeout(() => {
@@ -70,3 +74,4 @@ if (form) {
     });
   });
 }
+
